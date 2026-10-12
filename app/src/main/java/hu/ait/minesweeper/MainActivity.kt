@@ -7,11 +7,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import hu.ait.minesweeper.game.GameOverScreen
+import hu.ait.minesweeper.screen.GameState
 import hu.ait.minesweeper.screen.MineSweeperScreen
+import hu.ait.minesweeper.screen.MineSweeperViewModel
 import hu.ait.minesweeper.ui.theme.MineSweeperTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,9 +23,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             MineSweeperTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MineSweeperScreen(modifier = Modifier.padding(innerPadding))
+                    GameStateScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
+    }
+}
+
+
+
+@Composable
+fun GameStateScreen(modifier: Modifier, viewModel: MineSweeperViewModel = viewModel()) {
+    when(viewModel.gameState) {
+        GameState.GAME_STARTED -> MineSweeperScreen(modifier)
+        GameState.GAME_OVER -> GameOverScreen(modifier)
     }
 }
