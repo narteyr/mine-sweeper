@@ -28,7 +28,7 @@ class MineSweeperViewModel: ViewModel() {
 
     val maxRow = 5
     val maxCol = 5
-    val totalBombs = 1
+    val totalBombs = 3
     var firstClick = true
     var lockClicks = false
 
